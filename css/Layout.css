@@ -1,0 +1,178 @@
+/* CSS Document */
+*{
+margin: 0px;
+padding: 0px;
+}
+
+a{
+text-decoration: none;
+}
+
+.wrapper{
+width: 100%;
+height: 550px;
+
+
+}
+
+.header{
+
+width: 100%;
+height: 125px;
+background-image: url(../image/nick.jpg);
+background-repeat: no-repeat;
+background-color: #78BB6E
+}
+
+.navbar{
+width: 100%;
+height: 25px;
+background-color: #2D7921
+
+}
+
+.button a{
+float: left;
+width: 100px;
+height: 25px;
+line-height: 22px;
+font-family: verdana;
+font-size: 13px;
+color: #fff;
+font-weight: bold;
+text-align: center;
+}
+
+
+
+.button a:hover{
+float: left;
+width: 100px;
+height: 25px;
+line-height: 22px;
+font-family: verdana;
+font-size: 13px;
+color: #fff;
+font-weight: bold;
+text-align: center;
+background-color: #78BB6E;
+}
+
+
+
+.mainbody{
+
+width: 100%;
+height: 100%;
+font-family: verdana;
+font-size: 11px;
+color: #515151;
+
+}
+
+.side {
+  background-color:#CDEAC9;
+  height: 100%;
+  width:20%;
+  float:left;
+  padding:5px;
+}
+
+.btnaddress a:link, .btnaddress a:visited
+{
+color: #000;
+font-size: 20px;
+font-weight: bold;
+}
+
+.buttontop a:link,.buttontop a:visited{
+float: left;
+width: 75px;
+height: 25px;
+line-height: 22px;
+font-family: verdana;
+font-size: 13px;
+color: #fff;
+background-color: #66bdfd;
+font-weight: bold;
+text-align: center;
+border-radius: 5px;
+margin: 2px;
+}
+
+.buttontop a:hover{
+background-color: #78BB6E;
+}
+
+.contacts {
+    width:70%;
+    height: 100%;
+    float:left;
+    padding:10px;
+    font: 75% georgia, sans-serif;
+    font-size: 11px;
+    color: #515151;
+
+}
+
+.photobox {
+    position:relative;
+  height: 160px;
+    width: 160px;
+   border: 1px solid #000;
+
+}
+
+.addressbox {
+    position: relative;
+
+    top: 5%;
+    height: 150px;
+
+
+}
+/**** Inputs and Labels ****/
+
+label.description
+{
+	border:none;
+	color:#000;
+	display:block;
+	font-size:15px;
+    font-weight: bold;
+	padding:0 0 3px;
+
+}
+
+.addressent
+{
+width: 400px;
+height: 25px;
+}
+
+#fileUploadField{
+    opacity: 0;
+}
+
+input { margin-bottom: 20px; }
+
+input[type=text]
+{
+padding:1px; border:2px solid #ccc;
+-webkit-border-radius: 5px;
+border-radius: 5px;
+}
+
+input[type=submit]
+{
+    padding:5px 15px; background:#ccc; border:0 none;
+cursor:pointer;
+-webkit-border-radius: 5px;
+border-radius: 5px;
+    background-color: #66bdfd;
+    font-family: verdana;
+font-size: 13px;
+color: #fff;
+    font-weight: bold;
+}
+

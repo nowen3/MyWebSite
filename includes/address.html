@@ -1,0 +1,251 @@
+
+<!-- ----------------------------- side part of page ------------ -->
+<div id="side"  class="side">
+
+<!-- list names on side of page -->
+<?php
+//include 'code/functions.php';
+Getlistofnames();
+?>
+</div>
+
+<!-- -- ----------------------------- Main body of page ------------ -->
+<div class='contacts'>
+
+<style>
+		h2 {display: inline; color: blue}
+		h1 {display: inline;}
+</style>
+
+
+  <div class='addressbox'>
+
+
+<!-- ---------------------------------------DISPLAY ADDRESS ---------------------------- -->
+	<?php
+	if (isset($_GET['id']))
+	{
+	if ((isset($_GET['action'])) && ($_GET['action']=='show'))
+	{
+	$row = GetRecord($_GET["id"]);
+
+    if ($row != "")
+        {
+        echo '<table style="width:100%">';
+        echo '<tr><td style="width:200px" valign="top"  >';
+        if (!empty($row['Photo']))
+            {
+
+            //  echo "<div class='photobox'>";
+              echo '<img class="photobox" src="data:image/jpeg;base64,'.base64_encode( $row['Photo'] ).'" height="160" width="160">';
+            //  echo "</div>";
+            }
+            else {echo '<img class = "photobox" src="image/bluemanmxxl.png" alt="HTML5 Icon">';}
+        echo '</td><td>';
+        echo
+        "
+            <h2><b>First Name: </b></h2><h1><b>".$row['firstname']."</b></h1>
+            <br>
+            <br>
+            <h2><b>Last Name: </b></h2><h1><b>".$row['lastname']." </b></h1>
+            <br>
+            <br>
+            <h2><b>Street: </b></h2><h1><b>".$row['street']." </b></h1>
+            <br>
+            <br>
+            <h2><b>Town: </b></h2><h1><b>".$row['town']." </b></h1>
+            <br>
+            <br>
+            <h2><b>Post Code: </b></h2><h1><b>".$row['PostCode']." </b></h1>
+            <br>
+            <br>
+            <h2><b>Phone: </b></h2><h1><b>".$row['phone']." </b></h1>
+            <br>
+            <br>
+            <h2><b>Email: </b></h2><h1><b>".$row['email']." </b></h1>
+            <br>
+            <br>";
+
+        echo '<br/>';
+        echo '<div class = "buttontop">','<a href = "Index.php?page=address&action=delete&id=', $_GET['id'] ,'"','>Delete</a>';
+        echo '<a href = "Index.php?page=address&action=update&id=', $_GET['id'] ,'"','>Update</a>';
+        echo '</div>';
+        echo '</td></tr>';
+        echo '</table>';
+        }
+	}
+
+        /*-----------------------------------DELETE MYSQL -------------------------------*/
+	if ((isset($_GET['action'])) && ($_GET['action']=='delete'))
+	{
+		if (DeleteRecord($_GET["id"]))
+        {
+         echo '<META HTTP-EQUIV="refresh" content="0;URL=Index.php?page=address"> ';
+        }
+	}
+
+        /* ---------------------------------------- Update FORM--------------------------------------*/
+    if ((isset($_GET['action'])) && ($_GET['action']=='update'))
+	{
+    $row = GetRecord($_GET["id"]);
+	 if ($row != "")
+        {
+          echo '<table style="width:100%">';
+        echo '<tr><td style="width:200px" valign="top"  >';
+         echo "<div class='photobox'>";
+             // echo '<img class="photobox" src="data:image/jpeg;base64,'.base64_encode( $row['Photo'] ).'">';
+              echo "</div>";
+          echo  "<div class = 'buttontop'><a href=\"#\" id=\"uploadFile\">Photo</a></div>";
+
+          echo '</td><td>';
+
+        echo "<form name='addform'  action='' onsubmit='return validateForm(this)' method='post' enctype='multipart/form-data'>
+		<h1>Update address</h1>
+		<br>
+		<ul style='list-style: none;'>";
+          echo  "<li>
+				<label class='description' for='entname'>ID</label>
+				<input class='addressent' id='ID' name='idname' type='text' value =\"" .$row['id']. "\" readonly hidden >
+			</li>";
+        echo "<li>
+				<label class='description' for='entname'>First Name </label>
+				<input class='addressent' id='entname' name='fname' type='text' value =\"" .$row['firstname']. "\">
+			</li>";
+		echo	"<li>
+				<label class='description' for='entlastname'>Last Name </label>
+				<input class='addressent' id='entlastname' name='lname' type='text' value =\"" .$row['lastname']. "\">
+			</li>";
+		echo	"<li>
+				<label class='description' for='entaddress'>Address </label>
+				<input class='addressent' id='entaddress' name='address' type='text' value =\"" .$row['street']. "\">
+			</li>";
+		echo	"<li>
+				<label class='description' for='enttown'>Town </label>
+				<input class='addressent' id='enttown' name='town' type='text' value =\"" .$row['town']. "\">
+			</li>";
+           echo "<li>
+				<label class='description' for='enttown'>Post Code </label>
+				<input class='addressent' id='entpostcode' name='pcode' type='text' value =\"".$row['PostCode']. "\">
+			</li>
+			<li>
+				<label class='description' for='entphone'>Phone </label>
+				<input class='addressent' id='entphone' name='phone' type='text' value =\"" .$row['phone']. "\">
+			</li>
+			<li>
+				<label class='description' for='entemail'>E mail </label>
+				<input class='addressent' id='entemail' name='email' type='text' value =\"".$row['email']. "\">
+			</li>
+			<li>
+				 <input type=\"file\" name=\"Photo\" id=\"fileUploadField\" />
+                <div class = 'buttontop'><input type='submit' name = 'updaterec' value='update'/></div>
+			</li>
+		</ul>
+	</form>";
+          echo '</td></tr>';
+        echo '</table>';
+    }
+    }
+    }
+
+
+/* ---------------------------------------- ADD FORM--------------------------------------*/
+    if ((isset($_GET['action'])) && ($_GET['action']=='add'))
+	{
+
+         echo '<table style="width:100%">';
+        echo '<tr><td style="width:200px" valign="top"  >';
+        echo "<div class='photobox'>";
+      // echo '<img id="fileUploadField" src="#"  />';
+      echo "</div>";
+      echo  "<div class = 'buttontop'><a href=\"#\" id=\"uploadFile\">Photo</a></div>";
+
+        echo '</td><td>';
+
+
+        echo "<form name='addform'  action='' onsubmit='return validateForm(this)' method='post' enctype='multipart/form-data'>
+		<h1>Create new address</h1>
+		<br>
+		<ul style='list-style: none;'>
+			<li>
+				<label class='description' for='entname'>First Name </label>
+				<input class='addressent' id='entname' name='fname' type='text' />
+			</li>
+			<li>
+				<label class='description' for='entlastname'>Last Name </label>
+				<input class='addressent' id='entlastname' name='lname' type='text'>
+			</li>
+			<li>
+				<label class='description' for='entaddress'>Address </label>
+				<input class='addressent' id='entaddress' name='address' type='text'>
+			</li>
+			<li>
+				<label class='description' for='enttown'>Town </label>
+				<input class='addressent' id='enttown' name='town' type='text'>
+			</li>
+            <li>
+				<label class='description' for='enttown'>Post Code </label>
+				<input class='addressent' id='entpostcode' name='pcode' type='text'>
+			</li>
+			<li>
+				<label class='description' for='entphone'>Phone </label>
+				<input class='addressent' id='entphone' name='phone' type='text'>
+			</li>
+			<li>
+				<label class='description' for='entemail'>E mail </label>
+				<input class='addressent' id='entemail' name='email' type='text'>
+			</li>
+           	<li>
+            <input type=\"file\" name=\"Photo\" id=\"fileUploadField\" />
+				<input type='submit' name = 'addrec' value='submit'/>
+			</li>
+		</ul>
+	</form>";
+         echo '</td></tr>';
+        echo '</table>';
+    }
+
+/* --------------------------- SUBMIT-- ADD TO DATABASE NEW ADDRESS ----------------*/
+ if(isset($_POST['addrec']))
+	{
+	AddRecordfromPost();
+	}
+/* -------------------------Update----------------------------------- */
+ if(isset($_POST['updaterec']))
+
+	{
+     UpdateRecordfromPost();
+	}
+
+	?>
+
+	</div> <!-- div addressbox -->
+
+  <script>
+		function validateForm()
+        {
+            var x = document.forms["addform"]["fname"].value;
+			var y = document.forms["addform"]["lname"].value;
+			if ((x == null || x == "") && (y == null || y == ""))
+            {
+				alert("First or Last name must be filled out");
+				return false;
+			} else
+                    return true;
+		}
+
+     $('#uploadFile').click(function(e){
+    $('#fileUploadField').click();
+    e.preventDefault();
+
+ function imageIsLoaded(e) {
+    $('#fileUploadField').attr('src', e.target.result);
+};
+
+});
+
+
+
+
+
+	</script>
+
